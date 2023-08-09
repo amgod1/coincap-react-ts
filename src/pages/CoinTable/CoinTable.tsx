@@ -1,23 +1,27 @@
 import { useEffect } from "react"
-import Table from "../../components/Table/Table"
 import { useCoinContext } from "../../context/CoinContext/CoinContext"
+import Table from "../../components/Table/Table"
+import Pagination from "../../components/Pagination/Pagination"
 
 const CoinTable = () => {
-  const { state, setAllCoins } = useCoinContext()
+  const { setAllCoins } = useCoinContext()
 
   useEffect(() => {
     const fetchCoins = async () => {
       const response = await fetch("https://api.coincap.io/v2/assets")
       const data = await response.json()
-      console.log(data.data)
       setAllCoins(data.data)
     }
 
     fetchCoins()
-    console.log(state)
   }, [])
 
-  return <Table />
+  return (
+    <>
+      <Table />
+      <Pagination />
+    </>
+  )
 }
 
 export default CoinTable

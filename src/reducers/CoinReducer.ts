@@ -1,8 +1,10 @@
+import { getCoinsByPage } from "../helpers/getCoinsByPage"
 import CoinReducer from "./CoinReducer.interface"
 import { Action } from "./CoinReducer.types"
 
 export const initialState = {
-  currentPage: 1,
+  currentPage: 0,
+  lastPage: 0,
   allCoins: [],
   showCoins: [],
   userWallet: [],
@@ -17,13 +19,40 @@ export const CoinReducer = (
       return {
         ...state,
         allCoins: action.payload,
-        showCoins: action.payload.slice(0, 10),
+        lastPage: Math.floor(action.payload.length / 10) - 1,
+        showCoins: getCoinsByPage(action.payload, state.currentPage),
       }
-    // case "SET_CURRENT_PAGE":
-    //   return {
-    //     ...state,
-    //     currentPage: action.payload,
-    //   }
+    case "SET_LAST_CURRENT_PAGE":
+      return {
+        ...state,
+        currentPage: state.lastPage,
+        showCoins: getCoinsByPage(state.allCoins, state.lastPage),
+      }
+    case "SET_FIRST_CURRENT_PAGE": {
+      return {
+        ...state,
+        currentPage: 0,
+        showCoins: getCoinsByPage(state.allCoins, 0),
+      }
+    }
+    case "SET_PREV_CURRENT_PAGE": {
+      const prevPage = state.currentPage--
+
+      return {
+        ...state,
+        currentPage: prevPage,
+        showCoins: getCoinsByPage(state.allCoins, prevPage),
+      }
+    }
+    case "SET_NEXT_CURRENT_PAGE": {
+      const nextPage = state.currentPage++
+
+      return {
+        ...state,
+        currentPage: nextPage,
+        showCoins: getCoinsByPage(state.allCoins, nextPage),
+      }
+    }
     // case "SET_USER_WALLET":
     //   return {
     //     ...state,

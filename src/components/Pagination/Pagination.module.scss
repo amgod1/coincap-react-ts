@@ -1,0 +1,41 @@
+$red: #b54248;
+$green: #009879;
+$gray-active: #f3f3f3;
+$white: #ffffff;
+
+.pagination {
+  margin: 25px auto;
+  display: flex;
+  max-width: 320px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pagination__button {
+  border: none;
+  outline: none;
+  background-color: $gray-active;
+
+  padding: 10px;
+  transition: 0.1s all ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    scale: 1.1;
+  }
+
+  &:active {
+    background-color: $green;
+    color: $white;
+  }
+
+  &:disabled {
+    cursor: default;
+    scale: 1;
+
+    &:active {
+      background-color: $red;
+      color: $white;
+    }
+  }
+}
