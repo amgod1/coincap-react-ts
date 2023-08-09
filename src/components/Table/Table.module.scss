@@ -1,0 +1,45 @@
+$green: #009879;
+$gray: #dddddd;
+$gray-active: #f3f3f3;
+$white: #ffffff;
+
+.table {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  border-radius: 5px 5px 0 0;
+
+  td {
+    padding: 10px 0;
+  }
+}
+
+.table__head {
+  background-color: $green;
+  color: $white;
+  text-align: left;
+
+  td {
+    padding: 10px 10px;
+  }
+}
+
+.table__body {
+  tr {
+    border-bottom: 1px solid $gray;
+  }
+
+  tr:nth-of-type(even) {
+    background-color: $gray-active;
+  }
+
+  tr:last-of-type {
+    border-bottom: 2px solid $green;
+  }
+
+  tr:hover {
+    cursor: pointer;
+    background-color: $green;
+    color: $white;
+  }
+}
