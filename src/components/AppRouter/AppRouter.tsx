@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Layout from "../Layout/Layout"
 import CoinTable from "../../pages/CoinTable/CoinTable"
+import { AppRoutes } from "../../constants/routes"
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path={AppRoutes.Home} element={<Layout />}>
           <Route index element={<CoinTable />} />
         </Route>
       </Routes>

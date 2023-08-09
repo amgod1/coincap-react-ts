@@ -1,7 +1,12 @@
 import AppRouter from "./components/AppRouter/AppRouter"
+import { CoinContextProvider } from "./context/CoinContext/CoinContext"
 
 const App = () => {
-  return <AppRouter />
+  return (
+    <CoinContextProvider>
+      <AppRouter />
+    </CoinContextProvider>
+  )
 }
 
 export default App
