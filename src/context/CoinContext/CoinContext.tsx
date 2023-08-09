@@ -6,11 +6,14 @@ import {
   PropsWithChildren,
 } from "react"
 import CoinContextInterface from "./CoinContext.interface"
-import { CoinReducer, initialState } from "../../reducers/CoinReducer"
+import {
+  CoinReducer,
+  CoinReducerInitialState,
+} from "../../reducers/CoinReducer/CoinReducer"
 import Coin from "../../interfaces/Coin.interface"
 
 const CoinContext = createContext<CoinContextInterface>({
-  state: initialState,
+  coinState: CoinReducerInitialState,
   setAllCoins: () => {},
   setLastCurrentPage: () => {},
   setFirstCurrentPage: () => {},
@@ -19,7 +22,7 @@ const CoinContext = createContext<CoinContextInterface>({
 })
 
 export const CoinContextProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [state, dispatch] = useReducer(CoinReducer, initialState)
+  const [coinState, dispatch] = useReducer(CoinReducer, CoinReducerInitialState)
 
   const setAllCoins = (coins: Coin[]) =>
     dispatch({ type: "SET_ALL_COINS", payload: coins })
@@ -32,7 +35,7 @@ export const CoinContextProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <CoinContext.Provider
       value={{
-        state,
+        coinState,
         setAllCoins,
         setLastCurrentPage,
         setFirstCurrentPage,

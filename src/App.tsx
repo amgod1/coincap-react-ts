@@ -1,11 +1,13 @@
+import AddCoinModal from "./components/AddCoinModal/AddCoinModal"
 import AppRouter from "./components/AppRouter/AppRouter"
-import { CoinContextProvider } from "./context/CoinContext/CoinContext"
+import AppContext from "./context/AppContext"
 
 const App = () => {
   return (
-    <CoinContextProvider>
+    <AppContext>
       <AppRouter />
-    </CoinContextProvider>
+      <AddCoinModal />
+    </AppContext>
   )
 }
 

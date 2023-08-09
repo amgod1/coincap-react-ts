@@ -41,4 +41,15 @@ $white: #ffffff;
     background-color: $green;
     color: $white;
   }
+
+  .table__body--button {
+    outline: none;
+    border: 1px solid black;
+    padding: 7px 10px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.75;
+    }
+  }
 }

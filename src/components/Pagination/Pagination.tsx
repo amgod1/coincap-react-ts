@@ -3,7 +3,7 @@ import styles from "./Pagination.module.scss"
 
 const Pagination = () => {
   const {
-    state,
+    coinState,
     setFirstCurrentPage,
     setLastCurrentPage,
     setPrevCurrentPage,
@@ -11,33 +11,33 @@ const Pagination = () => {
   } = useCoinContext()
 
   return (
-    state.allCoins && (
+    coinState.allCoins && (
       <section className={styles.pagination}>
         <button
           onClick={setFirstCurrentPage}
-          disabled={state.currentPage === 0}
+          disabled={coinState.currentPage === 0}
           className={styles["pagination__button"]}
         >
           first
         </button>
         <button
           onClick={setPrevCurrentPage}
-          disabled={state.currentPage === 0}
+          disabled={coinState.currentPage === 0}
           className={styles["pagination__button"]}
         >
           prev
         </button>
-        <h2>{state.currentPage + 1}</h2>
+        <h2>{coinState.currentPage + 1}</h2>
         <button
           onClick={setNextCurrentPage}
-          disabled={state.currentPage === state.lastPage}
+          disabled={coinState.currentPage === coinState.lastPage}
           className={styles["pagination__button"]}
         >
           next
         </button>
         <button
           onClick={setLastCurrentPage}
-          disabled={state.currentPage === state.lastPage}
+          disabled={coinState.currentPage === coinState.lastPage}
           className={styles["pagination__button"]}
         >
           last

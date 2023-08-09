@@ -1,6 +1,6 @@
-import Coin from "../interfaces/Coin.interface"
+import Coin from "../../interfaces/Coin.interface"
 
-export type Action =
+export type CoinAction =
   | { type: "SET_ALL_COINS"; payload: Coin[] }
   | { type: "SET_LAST_CURRENT_PAGE" }
   | { type: "SET_FIRST_CURRENT_PAGE" }

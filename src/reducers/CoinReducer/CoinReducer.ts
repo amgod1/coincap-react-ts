@@ -1,18 +1,17 @@
-import { getCoinsByPage } from "../helpers/getCoinsByPage"
+import { getCoinsByPage } from "../../helpers/getCoinsByPage"
 import CoinReducer from "./CoinReducer.interface"
-import { Action } from "./CoinReducer.types"
+import { CoinAction } from "./CoinReducer.types"
 
-export const initialState = {
+export const CoinReducerInitialState = {
   currentPage: 0,
   lastPage: 0,
   allCoins: [],
   showCoins: [],
-  userWallet: [],
 }
 
 export const CoinReducer = (
   state: CoinReducer,
-  action: Action
+  action: CoinAction
 ): CoinReducer => {
   switch (action.type) {
     case "SET_ALL_COINS":
@@ -53,11 +52,6 @@ export const CoinReducer = (
         showCoins: getCoinsByPage(state.allCoins, nextPage),
       }
     }
-    // case "SET_USER_WALLET":
-    //   return {
-    //     ...state,
-    //     userWallet: action.payload,
-    //   }
     default:
       return state
   }
