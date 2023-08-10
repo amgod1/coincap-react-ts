@@ -1,0 +1,14 @@
+@import "../../../../styles/constants.scss";
+
+.walletInfo {
+  outline: none;
+  border: 2px solid black;
+  background-color: inherit;
+  padding: 10px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $green;
+    color: $white;
+  }
+}

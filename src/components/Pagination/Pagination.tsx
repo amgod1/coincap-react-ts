@@ -11,7 +11,7 @@ const Pagination = () => {
   } = useCoinContext()
 
   return (
-    coinState.allCoins && (
+    coinState.showCoins.length && (
       <section className={styles.pagination}>
         <button
           onClick={setFirstCurrentPage}
