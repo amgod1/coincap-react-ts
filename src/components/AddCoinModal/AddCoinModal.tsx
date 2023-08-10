@@ -37,7 +37,6 @@ const AddCoinModal = () => {
             pattern="^\+?(?!0\d+)\d*(\.\d*)?$"
             className={styles["modal__content--input"]}
           />
-
           <p>
             Current price: <b>{walletValue}$</b>
           </p>
