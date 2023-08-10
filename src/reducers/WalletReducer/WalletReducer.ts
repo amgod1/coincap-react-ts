@@ -1,3 +1,4 @@
+import { countWalletPrice } from "../../helpers/countWalletPrice"
 import WalletReducer from "./WalletReducer.interface"
 import { WalletAction } from "./WalletReducer.types"
 
@@ -5,6 +6,7 @@ export const WalletReducerInitialState = {
   coinInfo: { id: "", name: "", price: "" },
   coinValue: "0",
   walletCoins: [],
+  currentWalletPrice: "0",
   showWalletModal: false,
   showAddCoinModal: false,
 }
@@ -31,6 +33,10 @@ export const WalletReducer = (
       return {
         ...state,
         coinInfo: action.payload,
+        coinValue:
+          state.walletCoins.find(
+            (coin) => coin.coinInfo.id === action.payload.id
+          )?.coinValue || "0",
         showAddCoinModal: true,
       }
     }
@@ -72,18 +78,27 @@ export const WalletReducer = (
       }
     }
     case "ADD_COIN_TO_WALLET": {
-      const addedCoin = {
-        coinInfo: state.coinInfo,
-        coinValue: state.coinValue,
-      }
+      const { coinInfo, coinValue } = state
 
-      const walletCoins = [...state.walletCoins, addedCoin]
+      const existingCoinIndex = state.walletCoins.findIndex(
+        (coin) => coin.coinInfo.id === coinInfo.id
+      )
+
+      const walletCoins =
+        existingCoinIndex !== -1
+          ? [
+              ...state.walletCoins.slice(0, existingCoinIndex),
+              { coinInfo, coinValue },
+              ...state.walletCoins.slice(existingCoinIndex + 1),
+            ]
+          : [...state.walletCoins, { coinInfo, coinValue }]
 
       return {
         ...state,
         coinInfo: { id: "", name: "", price: "" },
         coinValue: "0",
         walletCoins,
+        currentWalletPrice: countWalletPrice(walletCoins),
         showAddCoinModal: false,
       }
     }

@@ -1,9 +1,10 @@
 import { CoinInfo } from "./WalletReducer.types"
 
 export default interface WalletReducer {
-  walletCoins: WalletCoins[]
   coinInfo: CoinInfo
   coinValue: string
+  walletCoins: WalletCoins[]
+  currentWalletPrice: string
   showWalletModal: boolean
   showAddCoinModal: boolean
 }
