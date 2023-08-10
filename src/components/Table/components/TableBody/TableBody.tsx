@@ -5,11 +5,12 @@ import styles from "../../Table.module.scss"
 
 const TableBody = () => {
   const { coinState } = useCoinContext()
-  const { setShowAddCoinModal } = useWalletContext()
+  const { showAddCoinModal } = useWalletContext()
 
-  const showAddCoinHandler = (id: string) => () => {
-    setShowAddCoinModal(id)
-  }
+  const showAddCoinHandler =
+    (id: string, name: string, price: string) => () => {
+      showAddCoinModal({ id, name, price })
+    }
 
   return (
     <tbody className={styles["table__body"]}>
@@ -21,7 +22,7 @@ const TableBody = () => {
           <td>{simplifyNumber(coin.changePercent24Hr)}%</td>
           <td>
             <button
-              onClick={showAddCoinHandler(coin.id)}
+              onClick={showAddCoinHandler(coin.id, coin.name, coin.priceUsd)}
               className={styles["table__body--button"]}
             >
               +

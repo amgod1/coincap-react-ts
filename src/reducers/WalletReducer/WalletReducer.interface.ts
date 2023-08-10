@@ -1,7 +1,14 @@
+import { CoinInfo } from "./WalletReducer.types"
+
 export default interface WalletReducer {
-  walletCoins: {}
-  coinId: string
-  coinValue: number
+  walletCoins: WalletCoins[]
+  coinInfo: CoinInfo
+  coinValue: string
   showWalletModal: boolean
   showAddCoinModal: boolean
+}
+
+export interface WalletCoins {
+  coinInfo: CoinInfo
+  coinValue: string
 }

@@ -1,14 +1,72 @@
+@import "../../styles/constants.scss";
+
 .modal {
   border: 2px solid black;
+  border-radius: 5px;
   padding: 15px;
   background-color: white;
 
-  width: 50vw;
-  height: 50vh;
+  width: max(280px, 35vw);
   z-index: 999;
 
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.modal__headline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .modal__headline--button {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+
+    outline: none;
+    border: 1px solid black;
+
+    &:hover {
+      color: $white;
+      background-color: $red;
+      cursor: pointer;
+    }
+  }
+}
+
+.modal__content {
+  display: flex;
+  flex-direction: column;
+
+  .modal__content--input {
+    padding: 10px;
+  }
+}
+
+.modal__buttons {
+  display: flex;
+  justify-content: end;
+
+  button {
+    margin: 5px;
+    padding: 10px 15px;
+
+    outline: none;
+    border: 1px solid black;
+
+    &:hover {
+      cursor: pointer;
+      color: white;
+    }
+  }
+
+  .modal__buttons--submit:hover {
+    background-color: $green;
+  }
+
+  .modal__buttons--cancel:hover {
+    background-color: $red;
+  }
 }

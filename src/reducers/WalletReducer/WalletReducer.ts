@@ -2,9 +2,9 @@ import WalletReducer from "./WalletReducer.interface"
 import { WalletAction } from "./WalletReducer.types"
 
 export const WalletReducerInitialState = {
-  coinId: "",
+  coinInfo: { id: "", name: "", price: "" },
   coinValue: "0",
-  walletCoins: {},
+  walletCoins: [],
   showWalletModal: false,
   showAddCoinModal: false,
 }
@@ -30,18 +30,27 @@ export const WalletReducer = (
       console.log("opening modal, ", action.payload)
       return {
         ...state,
+        coinInfo: action.payload,
         showAddCoinModal: true,
-        coinId: action.payload,
       }
     }
     case "HIDE_ADD_COIN_MODAL": {
       return {
         ...state,
+        coinInfo: { id: "", name: "", price: "" },
+        coinValue: "0",
         showAddCoinModal: false,
       }
     }
     case "SET_COIN_VALUE": {
       const newCoinValue = action.payload.trim()
+
+      if (Number(newCoinValue) > 1000) {
+        return {
+          ...state,
+          coinValue: "1000",
+        }
+      }
 
       if (newCoinValue === "") {
         return {
@@ -60,6 +69,22 @@ export const WalletReducer = (
       return {
         ...state,
         coinValue: newCoinValue,
+      }
+    }
+    case "ADD_COIN_TO_WALLET": {
+      const addedCoin = {
+        coinInfo: state.coinInfo,
+        coinValue: state.coinValue,
+      }
+
+      const walletCoins = [...state.walletCoins, addedCoin]
+
+      return {
+        ...state,
+        coinInfo: { id: "", name: "", price: "" },
+        coinValue: "0",
+        walletCoins,
+        showAddCoinModal: false,
       }
     }
 

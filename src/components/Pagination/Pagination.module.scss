@@ -1,10 +1,7 @@
-$red: #b54248;
-$green: #009879;
-$gray-active: #f3f3f3;
-$white: #ffffff;
+@import "../../styles/constants.scss";
 
 .pagination {
-  margin: 25px auto;
+  margin: 20px auto;
   display: flex;
   max-width: 320px;
   justify-content: space-around;

@@ -1,7 +1,4 @@
-$green: #009879;
-$gray: #dddddd;
-$gray-active: #f3f3f3;
-$white: #ffffff;
+@import "../../styles/constants.scss";
 
 .table {
   width: 100%;
@@ -28,12 +25,12 @@ $white: #ffffff;
     border-bottom: 1px solid $gray;
   }
 
-  tr:nth-of-type(even) {
-    background-color: $gray-active;
-  }
-
   tr:last-of-type {
     border-bottom: 2px solid $green;
+  }
+
+  tr:nth-of-type(even) {
+    background-color: $gray-active;
   }
 
   tr:hover {
