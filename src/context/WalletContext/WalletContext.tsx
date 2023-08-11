@@ -14,10 +14,13 @@ import { CoinInfo } from "../../reducers/WalletReducer/WalletReducer.types"
 
 const WalletContext = createContext<WalletContextInterface>({
   walletState: WalletReducerInitialState,
+  showWalletModal: () => {},
+  hideWalletModal: () => {},
   showAddCoinModal: () => {},
   hideAddCoinModal: () => {},
   setCoinValue: () => {},
   addCoinToWallet: () => {},
+  removeCoinFromWallet: () => {},
 })
 
 export const WalletContextProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -25,6 +28,14 @@ export const WalletContextProvider: FC<PropsWithChildren> = ({ children }) => {
     WalletReducer,
     WalletReducerInitialState
   )
+
+  const showWalletModal = () => {
+    dispatch({ type: "SHOW_WALLET_MODAL" })
+  }
+
+  const hideWalletModal = () => {
+    dispatch({ type: "HIDE_WALLET_MODAL" })
+  }
 
   const showAddCoinModal = (info: CoinInfo) => {
     dispatch({ type: "SHOW_ADD_COIN_MODAL", payload: info })
@@ -42,14 +53,21 @@ export const WalletContextProvider: FC<PropsWithChildren> = ({ children }) => {
     dispatch({ type: "ADD_COIN_TO_WALLET" })
   }
 
+  const removeCoinFromWallet = (id: string) => {
+    dispatch({ type: "REMOVE_COIN_FROM_WALLET", payload: id })
+  }
+
   return (
     <WalletContext.Provider
       value={{
+        showWalletModal,
+        hideWalletModal,
         walletState,
         showAddCoinModal,
         hideAddCoinModal,
         setCoinValue,
         addCoinToWallet,
+        removeCoinFromWallet,
       }}
     >
       {children}

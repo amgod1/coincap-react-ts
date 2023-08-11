@@ -8,7 +8,7 @@ const TopCoins = () => {
   return (
     <section className={styles.section}>
       {coinState.allCoins.slice(0, 3).map((coin) => (
-        <div className={styles["section__item"]}>
+        <div key={coin.id} className={styles["section__item"]}>
           <b>{coin.name}</b>
           <span>${simplifyNumber(coin.priceUsd)}</span>
         </div>

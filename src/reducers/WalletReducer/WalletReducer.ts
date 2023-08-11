@@ -17,9 +17,11 @@ export const WalletReducer = (
 ): WalletReducer => {
   switch (action.type) {
     case "SHOW_WALLET_MODAL": {
+      console.log("show wallet")
       return {
         ...state,
         showWalletModal: true,
+        showAddCoinModal: false,
       }
     }
     case "HIDE_WALLET_MODAL": {
@@ -37,6 +39,7 @@ export const WalletReducer = (
           state.walletCoins.find(
             (coin) => coin.coinInfo.id === action.payload.id
           )?.coinValue || "0",
+        showWalletModal: false,
         showAddCoinModal: true,
       }
     }
@@ -100,6 +103,17 @@ export const WalletReducer = (
         walletCoins,
         currentWalletPrice: countWalletPrice(walletCoins),
         showAddCoinModal: false,
+      }
+    }
+    case "REMOVE_COIN_FROM_WALLET": {
+      const updatedWalletCoins = state.walletCoins.filter(
+        (coin) => coin.coinInfo.id !== action.payload
+      )
+
+      return {
+        ...state,
+        walletCoins: updatedWalletCoins,
+        currentWalletPrice: countWalletPrice(updatedWalletCoins),
       }
     }
 

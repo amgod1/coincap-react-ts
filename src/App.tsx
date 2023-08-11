@@ -1,5 +1,6 @@
 import AddCoinModal from "./components/AddCoinModal/AddCoinModal"
 import AppRouter from "./components/AppRouter/AppRouter"
+import WalletModal from "./components/WalletModal/WalletModal"
 import AppContext from "./context/AppContext"
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
     <AppContext>
       <AppRouter />
       <AddCoinModal />
+      <WalletModal />
     </AppContext>
   )
 }

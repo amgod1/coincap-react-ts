@@ -5,6 +5,7 @@ export type WalletAction =
   | { type: "HIDE_ADD_COIN_MODAL" }
   | { type: "SET_COIN_VALUE"; payload: string }
   | { type: "ADD_COIN_TO_WALLET" }
+  | { type: "REMOVE_COIN_FROM_WALLET"; payload: string }
 
 export interface CoinInfo {
   id: string

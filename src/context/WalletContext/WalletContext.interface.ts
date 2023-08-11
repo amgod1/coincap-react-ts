@@ -3,8 +3,11 @@ import WalletReducer from "../../reducers/WalletReducer/WalletReducer.interface"
 
 export default interface WalletContext {
   walletState: WalletReducer
+  showWalletModal: () => void
+  hideWalletModal: () => void
   showAddCoinModal: (info: CoinInfo) => void
   hideAddCoinModal: () => void
   setCoinValue: (value: string) => void
   addCoinToWallet: () => void
+  removeCoinFromWallet: (id: string) => void
 }

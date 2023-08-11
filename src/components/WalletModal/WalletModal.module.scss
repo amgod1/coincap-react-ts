@@ -34,39 +34,25 @@
       }
     }
   }
-}
 
-.modal__content {
-  display: flex;
-  flex-direction: column;
+  .modal__content--item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
 
-  .modal__content--input {
-    padding: 10px;
-  }
-}
+    button {
+      margin: 5px;
+      padding: 10px 15px;
 
-.modal__buttons {
-  display: flex;
-  justify-content: end;
+      outline: none;
+      border: 1px solid black;
 
-  button {
-    margin: 5px;
-    padding: 10px 15px;
-
-    outline: none;
-    border: 1px solid black;
-
-    &:hover {
-      cursor: pointer;
-      color: white;
+      &:hover {
+        color: white;
+        background-color: $red;
+        cursor: pointer;
+      }
     }
-  }
-
-  .modal__buttons--submit:hover {
-    background-color: $green;
-  }
-
-  .modal__buttons--cancel:hover {
-    background-color: $red;
   }
 }
