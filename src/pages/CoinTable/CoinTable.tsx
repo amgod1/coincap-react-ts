@@ -2,15 +2,18 @@ import { useEffect } from "react"
 import { useCoinContext } from "../../context/CoinContext/CoinContext"
 import Table from "../../components/Table/Table"
 import Pagination from "../../components/Pagination/Pagination"
+import { useWalletContext } from "../../context/WalletContext/WalletContext"
 
 const CoinTable = () => {
   const { setAllCoins } = useCoinContext()
+  const { updateWalletPrice } = useWalletContext()
 
   useEffect(() => {
     const fetchCoins = async () => {
       const response = await fetch("https://api.coincap.io/v2/assets")
       const data = await response.json()
       setAllCoins(data.data)
+      updateWalletPrice(data.data)
     }
 
     fetchCoins()

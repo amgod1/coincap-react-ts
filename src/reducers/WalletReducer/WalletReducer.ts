@@ -2,11 +2,12 @@ import { countWalletPrice } from "../../helpers/countWalletPrice"
 import WalletReducer from "./WalletReducer.interface"
 import { WalletAction } from "./WalletReducer.types"
 
-export const WalletReducerInitialState = {
+export const WalletReducerInitialState: WalletReducer = {
   coinInfo: { id: "", name: "", price: "" },
   coinValue: "0",
-  walletCoins: [],
-  currentWalletPrice: "0",
+  walletCoins: JSON.parse(localStorage.getItem("walletCoins") || "[]"),
+  currentWalletPrice: localStorage.getItem("currentWalletPrice") || "0",
+  prevWalletPrice: localStorage.getItem("prevWalletPrice") || "0",
   showWalletModal: false,
   showAddCoinModal: false,
 }
@@ -17,7 +18,6 @@ export const WalletReducer = (
 ): WalletReducer => {
   switch (action.type) {
     case "SHOW_WALLET_MODAL": {
-      console.log("show wallet")
       return {
         ...state,
         showWalletModal: true,
@@ -31,7 +31,6 @@ export const WalletReducer = (
       }
     }
     case "SHOW_ADD_COIN_MODAL": {
-      console.log("opening modal, ", action.payload)
       return {
         ...state,
         coinInfo: action.payload,
@@ -68,7 +67,11 @@ export const WalletReducer = (
         }
       }
 
-      if (newCoinValue.length > 1 && newCoinValue.startsWith("0")) {
+      if (
+        newCoinValue.length > 1 &&
+        newCoinValue.startsWith("0") &&
+        !(newCoinValue[1] === ".")
+      ) {
         return {
           ...state,
           coinValue: newCoinValue.slice(1),
@@ -96,12 +99,19 @@ export const WalletReducer = (
             ]
           : [...state.walletCoins, { coinInfo, coinValue }]
 
+      const currentWalletPrice = countWalletPrice(walletCoins)
+
+      localStorage.setItem("walletCoins", JSON.stringify(walletCoins))
+      localStorage.setItem("currentWalletPrice", currentWalletPrice)
+      localStorage.setItem("prevWalletPrice", currentWalletPrice)
+
       return {
         ...state,
         coinInfo: { id: "", name: "", price: "" },
         coinValue: "0",
         walletCoins,
-        currentWalletPrice: countWalletPrice(walletCoins),
+        currentWalletPrice,
+        prevWalletPrice: currentWalletPrice,
         showAddCoinModal: false,
       }
     }
@@ -110,10 +120,49 @@ export const WalletReducer = (
         (coin) => coin.coinInfo.id !== action.payload
       )
 
+      const currentWalletPrice = countWalletPrice(updatedWalletCoins)
+
+      localStorage.setItem("walletCoins", JSON.stringify(updatedWalletCoins))
+      localStorage.setItem("currentWalletPrice", currentWalletPrice)
+      localStorage.setItem("prevWalletPrice", currentWalletPrice)
+
       return {
         ...state,
         walletCoins: updatedWalletCoins,
-        currentWalletPrice: countWalletPrice(updatedWalletCoins),
+        currentWalletPrice: currentWalletPrice,
+        prevWalletPrice: currentWalletPrice,
+      }
+    }
+    case "UPDATE_WALLET_PRICE": {
+      const updatedWalletCoins = state.walletCoins.map((walletCoin) => {
+        const matchingUpdatedCoin = action.payload.find(
+          (myCoin) => myCoin.id === walletCoin.coinInfo.id
+        )
+
+        if (matchingUpdatedCoin) {
+          return {
+            ...walletCoin,
+            coinInfo: {
+              ...walletCoin.coinInfo,
+              price: matchingUpdatedCoin.priceUsd,
+            },
+          }
+        }
+
+        return walletCoin
+      })
+
+      const currentWalletPrice = countWalletPrice(updatedWalletCoins)
+
+      localStorage.setItem("walletCoins", JSON.stringify(updatedWalletCoins))
+      localStorage.setItem("currentWalletPrice", currentWalletPrice)
+      localStorage.setItem("prevWalletPrice", state.currentWalletPrice)
+
+      return {
+        ...state,
+        walletCoins: updatedWalletCoins,
+        currentWalletPrice: currentWalletPrice,
+        prevWalletPrice: state.currentWalletPrice,
       }
     }
 

@@ -35,7 +35,7 @@ export const CoinReducer = (
       }
     }
     case "SET_PREV_CURRENT_PAGE": {
-      const prevPage = state.currentPage--
+      const prevPage = state.currentPage - 1
 
       return {
         ...state,
@@ -44,7 +44,7 @@ export const CoinReducer = (
       }
     }
     case "SET_NEXT_CURRENT_PAGE": {
-      const nextPage = state.currentPage++
+      const nextPage = state.currentPage + 1
 
       return {
         ...state,

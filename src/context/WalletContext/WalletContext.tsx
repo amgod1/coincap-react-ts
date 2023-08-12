@@ -11,6 +11,7 @@ import {
 } from "../../reducers/WalletReducer/WalletReducer"
 import WalletContextInterface from "./WalletContext.interface"
 import { CoinInfo } from "../../reducers/WalletReducer/WalletReducer.types"
+import Coin from "../../interfaces/Coin.interface"
 
 const WalletContext = createContext<WalletContextInterface>({
   walletState: WalletReducerInitialState,
@@ -21,6 +22,7 @@ const WalletContext = createContext<WalletContextInterface>({
   setCoinValue: () => {},
   addCoinToWallet: () => {},
   removeCoinFromWallet: () => {},
+  updateWalletPrice: () => {},
 })
 
 export const WalletContextProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -57,6 +59,10 @@ export const WalletContextProvider: FC<PropsWithChildren> = ({ children }) => {
     dispatch({ type: "REMOVE_COIN_FROM_WALLET", payload: id })
   }
 
+  const updateWalletPrice = (coins: Coin[]) => {
+    dispatch({ type: "UPDATE_WALLET_PRICE", payload: coins })
+  }
+
   return (
     <WalletContext.Provider
       value={{
@@ -68,6 +74,7 @@ export const WalletContextProvider: FC<PropsWithChildren> = ({ children }) => {
         setCoinValue,
         addCoinToWallet,
         removeCoinFromWallet,
+        updateWalletPrice,
       }}
     >
       {children}

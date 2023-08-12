@@ -5,6 +5,7 @@ export default interface WalletReducer {
   coinValue: string
   walletCoins: WalletCoins[]
   currentWalletPrice: string
+  prevWalletPrice: string
   showWalletModal: boolean
   showAddCoinModal: boolean
 }

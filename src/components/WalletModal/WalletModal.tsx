@@ -25,7 +25,10 @@ const WalletModal = () => {
         <div>
           {walletState.walletCoins.length ? (
             walletState.walletCoins.map((coin) => (
-              <div className={styles["modal__content--item"]}>
+              <div
+                key={coin.coinInfo.id}
+                className={styles["modal__content--item"]}
+              >
                 <p>
                   {coin.coinInfo.name}{" "}
                   <b>

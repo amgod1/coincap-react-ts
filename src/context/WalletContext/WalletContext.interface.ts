@@ -1,5 +1,6 @@
 import { CoinInfo } from "./../../reducers/WalletReducer/WalletReducer.types"
 import WalletReducer from "../../reducers/WalletReducer/WalletReducer.interface"
+import Coin from "../../interfaces/Coin.interface"
 
 export default interface WalletContext {
   walletState: WalletReducer
@@ -10,4 +11,5 @@ export default interface WalletContext {
   setCoinValue: (value: string) => void
   addCoinToWallet: () => void
   removeCoinFromWallet: (id: string) => void
+  updateWalletPrice: (coins: Coin[]) => void
 }
