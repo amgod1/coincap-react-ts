@@ -1,9 +1,9 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Layout from "../Layout/Layout"
-import CoinTable from "../../pages/CoinTable/CoinTable"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { AppRoutes } from "../../constants/routes"
+import Layout from "../../components/Layout/Layout"
+import CoinTable from "../CoinTable/CoinTable"
 
-const AppRouter = () => {
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -15,4 +15,4 @@ const AppRouter = () => {
   )
 }
 
-export default AppRouter
+export default Router

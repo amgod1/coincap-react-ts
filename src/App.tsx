@@ -1,12 +1,12 @@
-import AddCoinModal from "./components/AddCoinModal/AddCoinModal"
-import AppRouter from "./components/AppRouter/AppRouter"
-import WalletModal from "./components/WalletModal/WalletModal"
 import AppContext from "./context/AppContext"
+import AddCoinModal from "./components/AddCoinModal/AddCoinModal"
+import WalletModal from "./components/WalletModal/WalletModal"
+import Router from "./pages/Router/Router"
 
 const App = () => {
   return (
     <AppContext>
-      <AppRouter />
+      <Router />
       <AddCoinModal />
       <WalletModal />
     </AppContext>
