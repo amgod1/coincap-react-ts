@@ -2,15 +2,18 @@ import { useLocation } from "react-router-dom"
 import { useCoinContext } from "../../context/CoinContext/CoinContext"
 import { simplifyNumber } from "../../helpers/simplifyNumber"
 import styles from "./CoinPage.module.scss"
+import useFetchCoinHistory from "../../hooks/useFetchCoinHistory"
 
 const CoinPage = () => {
-  const { coinState } = useCoinContext()
   const { pathname } = useLocation()
-
   const coinId = pathname.slice(1)
+
+  const { coinState } = useCoinContext()
+  const { history, error } = useFetchCoinHistory(coinId)
+
   const coin = coinState.allCoins.find((coin) => coin.id === coinId)
 
-  console.log(coin)
+  console.log(history, error)
 
   return (
     <section className={styles.section}>

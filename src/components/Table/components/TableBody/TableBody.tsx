@@ -1,3 +1,4 @@
+import { MouseEventHandler } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCoinContext } from "../../../../context/CoinContext/CoinContext"
 import { useWalletContext } from "../../../../context/WalletContext/WalletContext"
@@ -10,8 +11,13 @@ const TableBody = () => {
   const navigate = useNavigate()
 
   const showAddCoinHandler =
-    (id: string, name: string, price: string) => (event: any) => {
-      event?.preventDefault()
+    (
+      id: string,
+      name: string,
+      price: string
+    ): MouseEventHandler<HTMLButtonElement> =>
+    (event) => {
+      event.stopPropagation()
       showAddCoinModal({ id, name, price })
     }
 
