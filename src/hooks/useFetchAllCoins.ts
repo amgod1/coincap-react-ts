@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import Coin from "../interfaces/Coin.interface"
 
-const useFetchCoins = () => {
+const useFetchAllCoins = () => {
   const [coins, setCoins] = useState<Coin[]>([])
   const [error, setError] = useState<Error | unknown | null>(null)
 
@@ -25,4 +25,4 @@ const useFetchCoins = () => {
   return { coins, error }
 }
 
-export default useFetchCoins
+export default useFetchAllCoins

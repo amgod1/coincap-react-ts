@@ -1,3 +1,21 @@
+@import "../../styles/constants.scss";
+
 .section {
   padding: 15px;
+
+  .section__info {
+    .section__info--button {
+      outline: none;
+      border: 2px solid black;
+      background-color: inherit;
+      padding: 10px 25px;
+      white-space: nowrap;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $green;
+        color: $white;
+      }
+    }
+  }
 }

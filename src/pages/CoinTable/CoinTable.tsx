@@ -3,10 +3,10 @@ import { useCoinContext } from "../../context/CoinContext/CoinContext"
 import Table from "../../components/Table/Table"
 import Pagination from "../../components/Pagination/Pagination"
 import { useWalletContext } from "../../context/WalletContext/WalletContext"
-import useFetchCoins from "../../hooks/useFetchCoins"
+import useFetchAllCoins from "../../hooks/useFetchAllCoins"
 
 const CoinTable = () => {
-  const { coins, error } = useFetchCoins()
+  const { coins, error } = useFetchAllCoins()
   const { setAllCoins } = useCoinContext()
   const { updateWalletPrice } = useWalletContext()
 
