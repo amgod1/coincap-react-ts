@@ -1,5 +1,5 @@
 export default interface ChartData {
-  labels: number[]
+  labels: string[]
   datasets: {
     label: string
     data: string[]

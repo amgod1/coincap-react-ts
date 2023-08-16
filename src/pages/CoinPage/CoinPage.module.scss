@@ -4,6 +4,14 @@
   padding: 15px;
 
   .section__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 576px) {
+      flex-direction: column;
+    }
+
     .section__info--button {
       outline: none;
       border: 2px solid black;
@@ -17,5 +25,11 @@
         color: $white;
       }
     }
+  }
+
+  .section__info--chart {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
   }
 }
