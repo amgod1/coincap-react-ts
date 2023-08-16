@@ -19,7 +19,7 @@ const CoinTable = () => {
     if (error) {
       console.error(error)
     }
-  }, [coins, error])
+  }, [])
 
   return (
     <>

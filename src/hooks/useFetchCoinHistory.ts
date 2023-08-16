@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import History from "../interfaces/History.interface"
+import { historyToChart } from "../helpers/historyToChart"
+import ChartData from "../interfaces/ChartData"
 
 const useFetchCoinHistory = (id: string) => {
-  const [history, setHistory] = useState<History[]>([])
+  const [history, setHistory] = useState<ChartData | null>(null)
   const [error, setError] = useState<Error | unknown | null>(null)
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const useFetchCoinHistory = (id: string) => {
           throw new Error("Failed to fetch coin history")
         }
         const data = await response.json()
-        setHistory(data.data)
+        setHistory(historyToChart(data.data))
       } catch (error: Error | unknown) {
         setError(error)
       }

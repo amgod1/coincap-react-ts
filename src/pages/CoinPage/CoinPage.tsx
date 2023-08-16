@@ -5,6 +5,7 @@ import { simplifyNumber } from "../../helpers/simplifyNumber"
 import styles from "./CoinPage.module.scss"
 import useFetchCoinHistory from "../../hooks/useFetchCoinHistory"
 import { useWalletContext } from "../../context/WalletContext/WalletContext"
+import Chart from "./components/Chart"
 
 const CoinPage = () => {
   const { pathname } = useLocation()
@@ -13,10 +14,10 @@ const CoinPage = () => {
   const { coinState } = useCoinContext()
   const coin = coinState.allCoins.find((coin) => coin.id === coinId)
 
-  const { history, error } = useFetchCoinHistory(coinId)
   const { showAddCoinModal } = useWalletContext()
+  const { history, error } = useFetchCoinHistory(coinId)
 
-  console.log(history, error)
+  console.log(history)
 
   const showAddCoinHandler =
     (
@@ -53,7 +54,9 @@ const CoinPage = () => {
             Add
           </button>
         </div>
-        <div className={styles["section__info--chart"]}></div>
+        <div className={styles["section__info--chart"]}>
+          <Chart data={history} />
+        </div>
       </div>
     </section>
   )
