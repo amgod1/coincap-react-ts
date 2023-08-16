@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { useWalletContext } from "../../../../context/WalletContext/WalletContext"
 import { countWalletDiff } from "../../../../helpers/countWalletDiff"
 import { simplifyNumber } from "../../../../helpers/simplifyNumber"
@@ -6,9 +7,13 @@ import styles from "./Wallet.module.scss"
 const Wallet = () => {
   const { walletState, showWalletModal } = useWalletContext()
 
-  const walletDiff = countWalletDiff(
-    walletState.prevWalletPrice,
-    walletState.currentWalletPrice
+  const walletDiff = useMemo(
+    () =>
+      countWalletDiff(
+        walletState.prevWalletPrice,
+        walletState.currentWalletPrice
+      ),
+    [walletState.prevWalletPrice, walletState.currentWalletPrice]
   )
 
   return (

@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { useWalletContext } from "../../context/WalletContext/WalletContext"
 import styles from "./AddCoinModa.module.scss"
 
@@ -9,8 +10,10 @@ const AddCoinModal = () => {
     setCoinValue(event.target.value)
   }
 
-  const walletValue =
-    Number(walletState.coinInfo.price) * Number(walletState.coinValue)
+  const walletValue = useMemo(
+    () => Number(walletState.coinInfo.price) * Number(walletState.coinValue),
+    [walletState.coinInfo.price, walletState.coinValue]
+  )
 
   return (
     walletState.showAddCoinModal && (
