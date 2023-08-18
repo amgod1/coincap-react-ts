@@ -3,6 +3,7 @@ import { AppRoutes } from "../../constants/routes"
 import Layout from "../../components/Layout/Layout"
 import CoinTable from "../CoinTable/CoinTable"
 import CoinPage from "../CoinPage/CoinPage"
+import Redirect from "../../components/Redirect/Redirect"
 import { usePagesContext } from "../../context/PagesContext/PagesContext"
 
 const Router = () => {
@@ -17,6 +18,7 @@ const Router = () => {
             <Route key={coinId} path={`/${coinId}`} element={<CoinPage />} />
           ))}
         </Route>
+        <Route path="*" element={<Redirect />} />
       </Routes>
     </BrowserRouter>
   )
