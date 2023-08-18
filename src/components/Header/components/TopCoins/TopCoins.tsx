@@ -1,13 +1,13 @@
-import { useCoinContext } from "../../../../context/CoinContext/CoinContext"
 import { simplifyNumber } from "../../../../helpers/simplifyNumber"
+import useFetchAllCoins from "../../../../hooks/useFetchAllCoins"
 import styles from "./TopCoins.module.scss"
 
 const TopCoins = () => {
-  const { coinState } = useCoinContext()
+  const { coins } = useFetchAllCoins(3)
 
   return (
     <section className={styles.section}>
-      {coinState.allCoins.slice(0, 3).map((coin) => (
+      {coins.map((coin) => (
         <div key={coin.id} className={styles["section__item"]}>
           <b>{coin.name}</b>
           <span>${simplifyNumber(coin.priceUsd)}</span>

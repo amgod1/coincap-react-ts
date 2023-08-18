@@ -5,8 +5,10 @@ import Table from "../../components/Table/Table"
 import Pagination from "../../components/Pagination/Pagination"
 import useFetchAllCoins from "../../hooks/useFetchAllCoins"
 import Loader from "../../components/Loader/Loader"
+import { usePagesContext } from "../../context/PagesContext/PagesContext"
 
 const CoinTable = () => {
+  const { setPages } = usePagesContext()
   const { coinState, setAllCoins } = useCoinContext()
   const { hideAddCoinModal, hideWalletModal } = useWalletContext()
 
@@ -18,6 +20,7 @@ const CoinTable = () => {
   useEffect(() => {
     if (coins.length) {
       setAllCoins(coins)
+      setPages(coins)
     }
 
     if (error) {

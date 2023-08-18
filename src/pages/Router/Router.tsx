@@ -3,10 +3,10 @@ import { AppRoutes } from "../../constants/routes"
 import Layout from "../../components/Layout/Layout"
 import CoinTable from "../CoinTable/CoinTable"
 import CoinPage from "../CoinPage/CoinPage"
-import { getPages } from "../../helpers/getPages"
+import { usePagesContext } from "../../context/PagesContext/PagesContext"
 
 const Router = () => {
-  const pages = getPages()
+  const { pages } = usePagesContext()
 
   return (
     <BrowserRouter>
@@ -21,5 +21,4 @@ const Router = () => {
     </BrowserRouter>
   )
 }
-
 export default Router
