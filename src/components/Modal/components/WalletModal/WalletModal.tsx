@@ -1,5 +1,5 @@
-import { useWalletContext } from "../../context/WalletContext/WalletContext"
-import { simplifyNumber } from "../../helpers/simplifyNumber"
+import { useWalletContext } from "../../../../context/WalletContext/WalletContext"
+import { simplifyNumber } from "../../../../helpers/simplifyNumber"
 import styles from "./WalletModal.module.scss"
 
 const WalletModal = () => {

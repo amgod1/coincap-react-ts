@@ -1,6 +1,6 @@
 import { useMemo } from "react"
-import { useWalletContext } from "../../context/WalletContext/WalletContext"
-import styles from "./AddCoinModa.module.scss"
+import { useWalletContext } from "../../../../context/WalletContext/WalletContext"
+import styles from "./AddCoinModal.module.scss"
 
 const AddCoinModal = () => {
   const { walletState, hideAddCoinModal, setCoinValue, addCoinToWallet } =
