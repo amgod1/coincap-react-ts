@@ -1,33 +1,34 @@
 import { useEffect } from "react"
+import { useCoinContext } from "../../context/CoinContext/CoinContext"
+import { useWalletContext } from "../../context/WalletContext/WalletContext"
 import Table from "../../components/Table/Table"
 import Pagination from "../../components/Pagination/Pagination"
-import { useCoinContext } from "../../context/CoinContext/CoinContext"
 import useFetchAllCoins from "../../hooks/useFetchAllCoins"
 import Loader from "../../components/Loader/Loader"
 
 const CoinTable = () => {
   const { coinState, setAllCoins } = useCoinContext()
+  const { hideAddCoinModal, hideWalletModal } = useWalletContext()
 
   const { coins, loading, error } = useFetchAllCoins(
     coinState?.loaded,
     coinState?.allCoins?.length
   )
-  // const { updateWalletPrice, hideAddCoinModal, hideWalletModal } =
-  //   useWalletContext()
 
   useEffect(() => {
-    // hideAddCoinModal()
-    // hideWalletModal()
-
     if (coins.length) {
       setAllCoins(coins)
-      // updateWalletPrice(coins)
     }
 
     if (error) {
       console.error(error)
     }
   }, [coins])
+
+  useEffect(() => {
+    hideAddCoinModal()
+    hideWalletModal()
+  }, [coinState])
 
   return (
     <>
