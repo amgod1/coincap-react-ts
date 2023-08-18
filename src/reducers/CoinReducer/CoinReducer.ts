@@ -1,4 +1,5 @@
 import { getCoinsByPage } from "../../helpers/getCoinsByPage"
+import { updatePages } from "../../helpers/updatePages"
 import CoinReducer from "./CoinReducer.interface"
 import { CoinAction } from "./CoinReducer.types"
 
@@ -16,6 +17,8 @@ export const CoinReducer = (
 ): CoinReducer => {
   switch (action.type) {
     case "SET_ALL_COINS":
+      updatePages(action.payload.map((coin) => coin.id))
+
       return {
         ...state,
         allCoins: action.payload,

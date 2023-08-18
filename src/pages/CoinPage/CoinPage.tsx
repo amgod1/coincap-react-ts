@@ -1,4 +1,4 @@
-import { MouseEventHandler, useEffect } from "react"
+import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { useCoinContext } from "../../context/CoinContext/CoinContext"
 import { useWalletContext } from "../../context/WalletContext/WalletContext"
@@ -6,25 +6,26 @@ import { simplifyNumber } from "../../helpers/simplifyNumber"
 import useFetchCoinHistory from "../../hooks/useFetchCoinHistory"
 import Chart from "./components/Chart"
 import styles from "./CoinPage.module.scss"
+import useFetchCoinsById from "../../hooks/useFetchCoinsById"
 
 const CoinPage = () => {
+  const { showAddCoinModal, hideAddCoinModal, hideWalletModal } =
+    useWalletContext()
   const { pathname } = useLocation()
   const coinId = pathname.slice(1)
 
   const { coinState } = useCoinContext()
-  const coin = coinState.allCoins.find((coin) => coin.id === coinId)
+  const checkStateForCoin = coinState.allCoins.find(
+    (coin) => coin.id === coinId
+  )
 
-  const { showAddCoinModal, hideAddCoinModal, hideWalletModal } =
-    useWalletContext()
+  const { coins } = useFetchCoinsById(coinId, checkStateForCoin)
   const { history } = useFetchCoinHistory(coinId)
 
+  const coin = coins[0] || {}
+
   const showAddCoinHandler =
-    (
-      id: string,
-      name: string,
-      price: string
-    ): MouseEventHandler<HTMLButtonElement> =>
-    () => {
+    (id: string, name: string, price: string) => () => {
       showAddCoinModal({ id, name, price })
     }
 
@@ -37,19 +38,21 @@ const CoinPage = () => {
     <section className={styles.section}>
       <div className={styles["section__info"]}>
         <p>
-          <b>Name:</b> {coin?.name}
+          <b>Name:</b> {coin.name}
         </p>
         <p>
-          <b>Rank:</b> {coin?.rank}
+          <b>Rank:</b> {coin.rank}
         </p>
         <p>
-          <b>Price:</b> ${simplifyNumber(coin?.priceUsd || "")}
+          <b>Price:</b> ${coin.priceUsd && simplifyNumber(coin.priceUsd)}
         </p>
         <p>
-          <b>Change:</b> {simplifyNumber(coin?.changePercent24Hr || "") + "%"}
+          <b>Change:</b>{" "}
+          {coin.changePercent24Hr &&
+            simplifyNumber(coin.changePercent24Hr || "") + "%"}
         </p>
         <button
-          onClick={showAddCoinHandler(coin?.id!, coin?.name!, coin?.priceUsd!)}
+          onClick={showAddCoinHandler(coin.id, coin.name, coin.priceUsd)}
           className={styles["section__info--button"]}
         >
           Add

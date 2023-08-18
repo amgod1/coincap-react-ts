@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react"
 import Coin from "../interfaces/Coin.interface"
 
-const useFetchCoinsById = (ids: string) => {
+const useFetchCoinsById = (
+  ids: string,
+  alreadyExist: Coin | undefined = undefined
+) => {
   const [coins, setCoins] = useState<Coin[]>([])
   const [error, setError] = useState<Error | unknown | null>(null)
+
+  if (alreadyExist) return { coins: [alreadyExist], error: null }
 
   useEffect(() => {
     if (!ids) return
