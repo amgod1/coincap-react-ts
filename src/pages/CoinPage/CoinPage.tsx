@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react"
+import { MouseEventHandler, useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import { useCoinContext } from "../../context/CoinContext/CoinContext"
 import { useWalletContext } from "../../context/WalletContext/WalletContext"
@@ -14,7 +14,8 @@ const CoinPage = () => {
   const { coinState } = useCoinContext()
   const coin = coinState.allCoins.find((coin) => coin.id === coinId)
 
-  const { showAddCoinModal } = useWalletContext()
+  const { showAddCoinModal, hideAddCoinModal, hideWalletModal } =
+    useWalletContext()
   const { history } = useFetchCoinHistory(coinId)
 
   const showAddCoinHandler =
@@ -26,6 +27,11 @@ const CoinPage = () => {
     () => {
       showAddCoinModal({ id, name, price })
     }
+
+  useEffect(() => {
+    hideAddCoinModal()
+    hideWalletModal()
+  }, [])
 
   return (
     <section className={styles.section}>

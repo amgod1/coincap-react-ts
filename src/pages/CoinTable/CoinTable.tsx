@@ -8,9 +8,13 @@ import useFetchAllCoins from "../../hooks/useFetchAllCoins"
 const CoinTable = () => {
   const { coins, error } = useFetchAllCoins()
   const { setAllCoins } = useCoinContext()
-  const { updateWalletPrice } = useWalletContext()
+  const { updateWalletPrice, hideAddCoinModal, hideWalletModal } =
+    useWalletContext()
 
   useEffect(() => {
+    hideAddCoinModal()
+    hideWalletModal()
+
     if (coins.length) {
       setAllCoins(coins)
       updateWalletPrice(coins)
