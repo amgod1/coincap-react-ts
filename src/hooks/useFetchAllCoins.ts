@@ -3,7 +3,7 @@ import Coin from "../interfaces/Coin.interface"
 
 const useFetchAllCoins = (count: number, currentLength: number = 10) => {
   const [coins, setCoins] = useState<Coin[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<Error | unknown | null>(null)
 
   useEffect(() => {
