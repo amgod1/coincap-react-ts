@@ -3,22 +3,29 @@ import { AppRoutes } from "../../constants/routes"
 import Layout from "../../components/Layout/Layout"
 import CoinTable from "../CoinTable/CoinTable"
 import CoinPage from "../CoinPage/CoinPage"
-import Redirect from "../../components/Redirect/Redirect"
-import { usePagesContext } from "../../context/PagesContext/PagesContext"
+import useFetchAllCoins from "../../hooks/useFetchAllCoins"
+import Loader from "../../components/Loader/Loader"
 
 const Router = () => {
-  const { pages } = usePagesContext()
+  const { coins, loading } = useFetchAllCoins(100)
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoutes.Home} element={<Layout />}>
-          <Route index element={<CoinTable />} />
-          {pages.map((coinId) => (
-            <Route key={coinId} path={`/${coinId}`} element={<CoinPage />} />
-          ))}
-        </Route>
-        <Route path="*" element={<Redirect />} />
+        {loading ? (
+          <Route path="*" element={<Loader />} />
+        ) : (
+          <Route path={AppRoutes.Home} element={<Layout />}>
+            <Route index element={<CoinTable />} />
+            {coins.map((coin) => (
+              <Route
+                key={coin.id}
+                path={`/${coin.id}`}
+                element={<CoinPage />}
+              />
+            ))}
+          </Route>
+        )}
       </Routes>
     </BrowserRouter>
   )
