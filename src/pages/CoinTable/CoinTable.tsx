@@ -11,8 +11,8 @@ const CoinTable = () => {
   const { hideAddCoinModal, hideWalletModal } = useWalletContext()
 
   const { coins, loading, error } = useFetchAllCoins(
-    coinState?.loaded,
-    coinState?.allCoins?.length
+    10,
+    coinState.currentPage * 10
   )
 
   useEffect(() => {

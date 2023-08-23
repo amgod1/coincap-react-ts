@@ -7,7 +7,7 @@ import useFetchAllCoins from "../../hooks/useFetchAllCoins"
 import Loader from "../../components/Loader/Loader"
 
 const Router = () => {
-  const { coins, loading } = useFetchAllCoins(100)
+  const { coins, loading } = useFetchAllCoins()
 
   return (
     <BrowserRouter>
