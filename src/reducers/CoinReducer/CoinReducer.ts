@@ -5,7 +5,6 @@ export const CoinReducerInitialState: CoinReducer = {
   currentPage: 0,
   lastPage: 9,
   allCoins: [],
-  showCoins: [],
 }
 
 export const CoinReducer = (
@@ -17,7 +16,6 @@ export const CoinReducer = (
       return {
         ...state,
         allCoins: action.payload,
-        showCoins: action.payload,
       }
     case "SET_LAST_CURRENT_PAGE":
       return {

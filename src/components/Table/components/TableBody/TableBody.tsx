@@ -23,7 +23,7 @@ const TableBody = () => {
 
   return (
     <tbody className={styles["table__body"]}>
-      {coinState.showCoins.map((coin) => (
+      {coinState.allCoins.map((coin) => (
         <tr key={coin.id} onClick={() => navigate(`/${coin.id}`)}>
           <td>{coin.rank}</td>
           <td>{coin.name}</td>
